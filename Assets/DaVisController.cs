@@ -21,17 +21,27 @@ public class DaVisController : MonoBehaviour
     private int DUNG_YEN = 1;
     private int DIE = 4;
     private int DAM = 2;
-
+    private bool isRight = true;
+    public GameObject skill;
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            // làm xuất hiện trên màn hình 1 gameObject với vị trí 
+            // == vị trí nhân vật 
+            SkillController _skill = skill.GetComponent<SkillController>();
+            _skill.direction = isRight ? Vector3.right : Vector3.left;
+            Instantiate(skill,transform.position,Quaternion.identity);
+        }
         // khi di chuyển thì đổi animation theo hướng tương ứng 
         if (Input.GetKey(KeyCode.A)) // GetKey : hold key
         {
-            
+            isRight = false;
             transform.Translate(Vector3.left * 2.5f * Time.deltaTime);
         }
         if (Input.GetKey(KeyCode.D)) // GetKey : hold key
         {
+            isRight = true;
             //_rigidbody.AddForce(Vector2.right * 2.5f);
             transform.Translate(Vector3.right * 2.5f * Time.deltaTime);
         }
